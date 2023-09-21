@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\JobCategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JobCategoryRepository::class)]
@@ -15,6 +17,18 @@ class JobCategory
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
+
+    #[ORM\OneToMany(mappedBy: 'jobCategory', targetEntity: Candidat::class)]
+    private Collection $candidats;
+
+    #[ORM\OneToMany(mappedBy: 'jobCategory', targetEntity: JobOffer::class)]
+    private Collection $jobOffers;
+
+    public function __construct()
+    {
+        $this->candidats = new ArrayCollection();
+        $this->jobOffers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -29,6 +43,66 @@ class JobCategory
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidat>
+     */
+    public function getCandidats(): Collection
+    {
+        return $this->candidats;
+    }
+
+    public function addCandidat(Candidat $candidat): static
+    {
+        if (!$this->candidats->contains($candidat)) {
+            $this->candidats->add($candidat);
+            $candidat->setJobCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidat(Candidat $candidat): static
+    {
+        if ($this->candidats->removeElement($candidat)) {
+            // set the owning side to null (unless already changed)
+            if ($candidat->getJobCategory() === $this) {
+                $candidat->setJobCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, JobOffer>
+     */
+    public function getJobOffers(): Collection
+    {
+        return $this->jobOffers;
+    }
+
+    public function addJobOffer(JobOffer $jobOffer): static
+    {
+        if (!$this->jobOffers->contains($jobOffer)) {
+            $this->jobOffers->add($jobOffer);
+            $jobOffer->setJobCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobOffer(JobOffer $jobOffer): static
+    {
+        if ($this->jobOffers->removeElement($jobOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($jobOffer->getJobCategory() === $this) {
+                $jobOffer->setJobCategory(null);
+            }
+        }
 
         return $this;
     }
