@@ -16,40 +16,40 @@ class Candidat
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $nationality = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $currentLocation = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $birthDate = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $birthPlace = null;
 
     #[ORM\Column]
-    private ?bool $isAvailable = null;
+    private ?bool $isAvailable = false;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $experience = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $shortDescription = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $note = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -59,7 +59,7 @@ class Candidat
     private ?\DateTimeInterface $dateUpdated = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidats')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?JobCategory $jobCategory = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
@@ -67,7 +67,7 @@ class Candidat
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidats')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Gender $gender = null;
 
     #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Media::class)]
