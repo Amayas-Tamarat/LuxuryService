@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,10 +40,11 @@ class RegistrationController extends AbstractController
             );
             $candidat = new Candidat();
             $candidat->setUser($user);
+            $candidat->setDateCreated(new DateTime());
 
-            dd($candidat);
-
+            // dd($candidat);
             $entityManager->persist($user);
+            $entityManager->persist($candidat);
             $entityManager->flush();
             // do anything else you need here, like send an email
             $email = (new Email())
