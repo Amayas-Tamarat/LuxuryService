@@ -16,10 +16,10 @@ class CandidatController extends AbstractController
 {
 
     #[Route('/profile', name: 'app_candidat_profile', methods: ['GET', 'POST'])]
-    public function edit(Request $request, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager): Response    
     {
 
-        $candidat = $this->getUser()->getCandidat();
+        // $candidat = $this->getUser()->getCandidat();
 
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);

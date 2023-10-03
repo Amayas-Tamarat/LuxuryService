@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\JobType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class JobTypeCrudController extends AbstractCrudController
 {
@@ -12,14 +13,12 @@ class JobTypeCrudController extends AbstractCrudController
         return JobType::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('title')
         ];
     }
-    */
+
 }
