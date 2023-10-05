@@ -19,7 +19,7 @@ class CandidatController extends AbstractController
     public function edit(Request $request, EntityManagerInterface $entityManager): Response    
     {
 
-        // $candidat = $this->getUser()->getCandidat();
+        $candidat = $this->getUser()->getCandidat();
 
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
