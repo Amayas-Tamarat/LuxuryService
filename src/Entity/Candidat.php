@@ -62,10 +62,6 @@ class Candidat
     #[ORM\JoinColumn(nullable: true)]
     private ?JobCategory $jobCategory = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     #[ORM\ManyToOne(inversedBy: 'candidats')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Gender $gender = null;
@@ -75,6 +71,9 @@ class Candidat
 
     #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Candidature::class)]
     private Collection $candidatures;
+
+    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
+    private ?User $User = null;
 
     public function __construct()
     {
@@ -267,18 +266,6 @@ class Candidat
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getGender(): ?Gender
     {
         return $this->gender;
@@ -347,6 +334,18 @@ class Candidat
                 $candidature->setCandidat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
 
         return $this;
     }

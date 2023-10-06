@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Candidat;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,17 +19,18 @@ class CandidatType extends AbstractType
             ->add('country')
             ->add('nationality')
             ->add('currentLocation')
-            ->add('birthDate')
+            // ->add('birthDate')
             ->add('birthPlace')
             ->add('isAvailable')
             ->add('experience')
             ->add('shortDescription')
             ->add('note')
-            ->add('dateCreated')
-            ->add('dateUpdated')
-            ->add('jobCategory')
-            ->add('user')
-            ->add('gender')
+            // ->add('dateCreated')
+            // ->add('dateUpdated')
+            // ->add('jobCategory')
+            // ->add('user')
+            // ->add('gender', Gender::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 

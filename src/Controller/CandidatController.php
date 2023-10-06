@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-// use App\Entity\Candidat;
+use App\Entity\Candidat;
 use App\Form\CandidatType;
 use App\Repository\CandidatRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,8 +18,11 @@ class CandidatController extends AbstractController
     #[Route('/profile', name: 'app_candidat_profile', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $entityManager): Response    
     {
-
-        $candidat = $this->getUser()->getCandidat();
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+        $candidat = $user->getCandidat();
 
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
@@ -28,7 +31,7 @@ class CandidatController extends AbstractController
         {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_profile', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('candidat/profile.html.twig', 
