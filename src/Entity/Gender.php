@@ -26,6 +26,11 @@ class Gender
         $this->candidats = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getGenderName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

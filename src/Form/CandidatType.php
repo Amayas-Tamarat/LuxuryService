@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Form;
-
 use App\Entity\Candidat;
+use App\Entity\Gender;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +31,14 @@ class CandidatType extends AbstractType
             // ->add('dateUpdated')
             // ->add('jobCategory')
             // ->add('user')
-            // ->add('gender', Gender::class)
+            // ->add('gender', EntityType::class, [
+            //     'class' => Gender::class,
+            //     'choices' => $genderRepository->getAll(),
+            //     'choice_label' => 'genderName',
+            // ])
+            ->add ('gender', EntityType::class,[
+                'class' => Gender::class
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
