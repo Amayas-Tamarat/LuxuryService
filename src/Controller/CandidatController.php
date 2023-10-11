@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CandidatController extends AbstractController
 {
 
-    #[Route('/profile', name: 'app_candidat_profile', methods: ['GET', 'POST'])]
+    #[Route('/profile', name: 'app_candidat', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $entityManager): Response    
     {
         /**
@@ -32,7 +32,7 @@ class CandidatController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_candidat_profile', [], Response::HTTP_SEE_OTHER);
-        }
+        } 
 
         return $this->render('candidat/profile.html.twig', 
         [
