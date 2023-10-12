@@ -128,8 +128,12 @@
                                 <li><span> Location </span>{{ JobOffer.location }}</li>
                                 {# <li><span> Starting date </span>2018-05-18</li> #}
                             </ul>
-                            <a class="btn btn-block gradient primary mt-30 waves-effect waves-light" href="#!">Apply for this job</a>
-                            <div class="btn btn-block btn-success mt-30 waves-effect waves-light disabled">You have applied for this job</div>
+                                {% if user %}
+									<a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+                                {% else %}
+    							    <a class="btn btn-md primary waves-effect waves-light disabled" href="#!">Apply</a>
+                                {% endif %}     
+                                <div class="btn btn-block btn-success mt-30 waves-effect waves-light disabled">You have applied for this job</div>
                         </div>
                     </div>
                 </div>

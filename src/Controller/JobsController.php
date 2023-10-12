@@ -15,12 +15,14 @@ class JobsController extends AbstractController
     public function jobs(JobOfferRepository $jobOfferRepository, JobCategoryRepository $jobCategoryRepository): Response
     {
 
+        $user = $this->getUser();
         $jobOffers = $jobOfferRepository->findAll();
         $jobCategories = $jobCategoryRepository->findAll();
         return $this->render('jobs/jobs.html.twig', [
             'controller_name' => 'JobsController',
             'jobOffers' => $jobOffers,
-            'jobCategories' => $jobCategories
+            'jobCategories' => $jobCategories,
+            'user' => $user
         ]);
     }
 
@@ -72,10 +74,13 @@ class JobsController extends AbstractController
                 ->getOneOrNullResult();
         }
 
+        $user = $this->getUser();
+
         return $this->render('jobs/showJob.html.twig', [
             'JobOffer' => $currentJobOffer,
             'nextJobOffer' => $nextJobOffer,
             'previousJobOffer' => $previousJobOffer,
+            'user' => $user
         ]);
     }
 

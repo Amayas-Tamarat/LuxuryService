@@ -13,6 +13,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(JobOfferRepository $jobOfferRepository, JobCategoryRepository $jobCategoryRepository): Response
     {
+        $user = $this->getUser();
         $jobOffers = $jobOfferRepository->findAll();
         $jobCategories = $jobCategoryRepository->findAll();
 
@@ -20,7 +21,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'jobOffers' => $jobOffers,
-            'jobCategories'=>$jobCategories
+            'jobCategories'=>$jobCategories,
+            'user'=>$user 
         ]);
     }
 }

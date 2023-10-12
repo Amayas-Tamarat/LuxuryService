@@ -59,8 +59,7 @@ class CandidatType extends AbstractType
 
             ->add('currentLocation')
             ->add('birthDate', DateType::class, [
-                'input' => 'datetime_immutable',
-                // 'html5' => false,
+                // 'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'attr' => [
                     'class' => 'datepicker',
